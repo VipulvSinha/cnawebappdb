@@ -27,7 +27,7 @@ spec:
       - image: mysql:5.7
         name: mysql
         ports:
-        - containerPort: 1300
+        - containerPort: 3306
         envFrom: 
         - configMapRef:
             name: vipuldb-config
