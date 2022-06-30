@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  MYSQL_DATABASE: vipuldb
+  MYSQL_USER: vipuluser
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: vipuldb-config
+  namespace: vipul-ns
