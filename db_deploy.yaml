@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: vipuldb
+  name: vipuldb
+  namespace: vipul-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vipuldb
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: vipuldb
+    spec:
+      volumes:
+      - name: vipuldbvol
+        hostPath:
+          path: /data/vipuldb
+          type: DirectoryOrCreate
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        ports:
+        - containerPort: 1300
+        envFrom: 
+        - configMapRef:
+          name: vipuldb-config
+        env:
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: vipuldb-sec
+              key: db_pass
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: vipuldb-sec
+              key: root_pass
+        resources: {}
+        volumeMounts:
+        - name: vipuldbvol
+          mountPath: /var/lib/mysql/
