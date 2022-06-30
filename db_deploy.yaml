@@ -30,7 +30,7 @@ spec:
         - containerPort: 1300
         envFrom: 
         - configMapRef:
-          name: vipuldb-config
+            name: vipuldb-config
         env:
         - name: MYSQL_PASSWORD
           valueFrom:
